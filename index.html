@@ -40,7 +40,18 @@
                 </select>
             </div>
             
-            <div class="info-text">Press Space to add a new box. Type letters for known positions.</div>
+            <div class="word-size-control">
+                <label for="word-size-slider">Word Size: <span id="size-display">4</span></label>
+                <div class="slider-container">
+                    <input type="range" id="word-size-slider" min="2" max="15" value="4" class="slider">
+                </div>
+            </div>
+            
+            <div class="button-group">
+                <button id="reset-btn" class="btn btn-reset">Clear All</button>
+            </div>
+            
+            <div class="info-text">Enter letters for known positions, leave blanks for unknown letters.</div>
         </div>
         
         <div id="word-input" class="word-input"></div>

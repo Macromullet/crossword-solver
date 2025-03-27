@@ -7,14 +7,25 @@
 
 document.addEventListener('DOMContentLoaded', function() {
     const themePicker = document.getElementById('theme-picker');
+    const wordSizeSlider = document.getElementById('word-size-slider');
+    const sizeDisplay = document.getElementById('size-display');
     const wordInputContainer = document.getElementById('word-input');
     const resultsContainer = document.getElementById('results');
     const mainContainer = document.getElementById('main-container');
+    const resetBtn = document.getElementById('reset-btn');
     
     let letterBoxes = [];
+    let currentWordSize = 4; // Default word size
     
-    // Initialize with a few boxes automatically
-    initializeLetterBoxes(5);
+    // Initialize with the default word size from slider
+    generateLetterBoxes(currentWordSize);
+    
+    // Word size slider functionality
+    wordSizeSlider.addEventListener('input', function() {
+        currentWordSize = parseInt(this.value);
+        sizeDisplay.textContent = currentWordSize;
+        generateLetterBoxes(currentWordSize);
+    });
     
     // Theme switching functionality
     themePicker.addEventListener('change', function() {
@@ -30,6 +41,11 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
     
+    // Reset button functionality
+    resetBtn.addEventListener('click', function() {
+        generateLetterBoxes(currentWordSize); // Reset to current word size
+    });
+    
     // Function to apply random rotations for silly theme
     function applyRandomRotations() {
         const elements = document.querySelectorAll('.letter-box, .result-word');
@@ -39,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
-    // Function to initialize letter boxes
-    function initializeLetterBoxes(size) {
+    // Function to generate letter boxes based on word size
+    function generateLetterBoxes(size) {
         // Clear previous boxes and results
         wordInputContainer.innerHTML = '';
         resultsContainer.innerHTML = '';
@@ -48,11 +64,68 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Create new letter boxes
         for (let i = 0; i < size; i++) {
-            addLetterBox(i);
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.maxLength = 1;
+            input.className = 'letter-box';
+            input.dataset.index = i;
+            
+            // If we're in silly theme, apply random rotation
+            if (themePicker.value === 'silly') {
+                const rotation = Math.random() * 6 - 3; // Random between -3 and 3 degrees
+                input.style.setProperty('--random-rotate', `${rotation}deg`);
+            }
+            
+            // Handle input changes
+            input.addEventListener('input', function(e) {
+                this.value = this.value.toUpperCase();
+                if (this.value) {
+                    // Move focus to next input if available
+                    const nextIndex = parseInt(this.dataset.index) + 1;
+                    if (nextIndex < letterBoxes.length) {
+                        letterBoxes[nextIndex].focus();
+                    }
+                }
+                updateResults();
+            });
+            
+            // Handle keyboard navigation
+            input.addEventListener('keydown', function(e) {
+                const currentIndex = parseInt(this.dataset.index);
+                
+                if (e.key === 'ArrowRight') {
+                    // Right arrow key - move to next box
+                    e.preventDefault();
+                    const nextIndex = currentIndex + 1;
+                    if (nextIndex < letterBoxes.length) {
+                        letterBoxes[nextIndex].focus();
+                    }
+                } else if (e.key === 'ArrowLeft') {
+                    // Left arrow key - move to previous box
+                    e.preventDefault();
+                    const prevIndex = currentIndex - 1;
+                    if (prevIndex >= 0) {
+                        letterBoxes[prevIndex].focus();
+                    }
+                } else if (e.key === 'Backspace' && !this.value) {
+                    // Backspace on empty box - move to previous box
+                    const prevIndex = currentIndex - 1;
+                    if (prevIndex >= 0) {
+                        letterBoxes[prevIndex].focus();
+                    }
+                } else if (e.key === ' ') {
+                    // Space key - skip to next box without entering a character
+                    e.preventDefault();
+                    const nextIndex = currentIndex + 1;
+                    if (nextIndex < letterBoxes.length) {
+                        letterBoxes[nextIndex].focus();
+                    }
+                }
+            });
+            
+            letterBoxes.push(input);
+            wordInputContainer.appendChild(input);
         }
-        
-        // Add one empty box for expansion
-        addEmptyBox();
         
         // Focus on the first box
         if (letterBoxes.length > 0) {
@@ -60,126 +133,29 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
     
-    // Function to add a single letter box
-    function addLetterBox(index) {
-        const input = document.createElement('input');
-        input.type = 'text';
-        input.maxLength = 1;
-        input.className = 'letter-box';
-        input.dataset.index = index;
-        
-        // If we're in silly theme, apply random rotation
-        if (themePicker.value === 'silly') {
-            const rotation = Math.random() * 6 - 3; // Random between -3 and 3 degrees
-            input.style.setProperty('--random-rotate', `${rotation}deg`);
-        }
-        
-        // Handle input changes
-        input.addEventListener('input', function(e) {
-            this.value = this.value.toUpperCase();
-            if (this.value) {
-                // Move focus to next input if available
-                const nextIndex = parseInt(this.dataset.index) + 1;
-                if (nextIndex < letterBoxes.length) {
-                    letterBoxes[nextIndex].focus();
-                } else if (this === letterBoxes[letterBoxes.length - 1]) {
-                    // If this is the last box and we entered a letter, add a new empty box
-                    addEmptyBox();
-                }
-            }
-            updateResults();
-        });
-        
-        // Handle special key presses
-        input.addEventListener('keydown', function(e) {
-            if (e.key === 'Backspace' && !this.value) {
-                // If backspace on empty box, delete it unless it's the first or last box
-                const currentIndex = parseInt(this.dataset.index);
-                if (currentIndex > 0 && currentIndex === letterBoxes.length - 2) {
-                    e.preventDefault();
-                    const prevBox = letterBoxes[currentIndex - 1];
-                    removeLetterBox(this);
-                    prevBox.focus();
-                    return;
-                }
-                
-                // Otherwise just move to previous box
-                const prevIndex = currentIndex - 1;
-                if (prevIndex >= 0) {
-                    letterBoxes[prevIndex].focus();
-                }
-            } else if (e.key === ' ') {
-                // Space key moves to the next box without entering a character
-                e.preventDefault();
-                const nextIndex = parseInt(this.dataset.index) + 1;
-                if (nextIndex < letterBoxes.length) {
-                    letterBoxes[nextIndex].focus();
-                } else {
-                    // If at the last box, add a new box
-                    addEmptyBox();
-                }
-            }
-        });
-        
-        letterBoxes.push(input);
-        wordInputContainer.appendChild(input);
-        return input;
-    }
-    
-    // Function to add empty box at the end
-    function addEmptyBox() {
-        // Add a new box at the end for expansion
-        const newIndex = letterBoxes.length;
-        const newBox = addLetterBox(newIndex);
-        
-        // Check if we should focus on it
-        if (letterBoxes[newIndex - 1].value !== '') {
-            newBox.focus();
-        }
-        
-        // Update results after adding a new box
-        updateResults();
-    }
-    
-    // Function to remove a letter box
-    function removeLetterBox(box) {
-        const index = parseInt(box.dataset.index);
-        wordInputContainer.removeChild(box);
-        
-        // Remove from array
-        letterBoxes.splice(index, 1);
-        
-        // Update indices of remaining boxes
-        for (let i = index; i < letterBoxes.length; i++) {
-            letterBoxes[i].dataset.index = i;
-        }
-        
-        // Update results after removing a box
-        updateResults();
-    }
-    
     function updateResults() {
         resultsContainer.innerHTML = '';
         
         // Exit if solver isn't loaded yet
         if (!solver) {
-            resultsContainer.innerHTML = '<div class="loading">Loading dictionary...</div>';
             return;
         }
         
-        // Get current pattern, excluding the last empty box used for expansion
+        // Get current pattern
         let pattern = '';
+        let hasLetters = false;
         
-        for (let i = 0; i < letterBoxes.length - 1; i++) {
-            if (letterBoxes[i].value) {
-                pattern += letterBoxes[i].value.toLowerCase();
+        for (const box of letterBoxes) {
+            if (box.value) {
+                pattern += box.value.toLowerCase();
+                hasLetters = true;
             } else {
                 pattern += '.'; // Use dot as wildcard
             }
         }
         
-        // Skip search if pattern is too short or all wildcards
-        if (pattern.length === 0 || pattern === '.'.repeat(pattern.length)) {
+        // Skip search if no letters entered
+        if (!hasLetters) {
             return;
         }
         
@@ -192,10 +168,14 @@ document.addEventListener('DOMContentLoaded', function() {
         } else {
             const resultHeader = document.createElement('div');
             resultHeader.className = 'result-header';
-            resultHeader.textContent = `Found ${matches.length} matching words:`;
+            resultHeader.textContent = `Found ${matches.length} matching ${matches.length === 1 ? 'word' : 'words'}:`;
             resultsContainer.appendChild(resultHeader);
             
-            matches.forEach(word => {
+            // Limit the number of displayed words for better performance
+            const displayLimit = 200;
+            const displayedMatches = matches.slice(0, displayLimit);
+            
+            displayedMatches.forEach(word => {
                 const wordElement = document.createElement('div');
                 wordElement.className = 'result-word';
                 wordElement.textContent = word;
@@ -210,24 +190,26 @@ document.addEventListener('DOMContentLoaded', function() {
                 
                 // Add click behavior to fill in the word
                 wordElement.addEventListener('click', function() {
-                    // Resize boxes if needed - make sure we have enough boxes
-                    while (letterBoxes.length - 1 < word.length) {
-                        addEmptyBox();
-                    }
-                    
                     // Fill the word
-                    for (let i = 0; i < word.length; i++) {
-                        letterBoxes[i].value = word[i].toUpperCase();
-                    }
-                    
-                    // Clear any extra boxes
-                    for (let i = word.length; i < letterBoxes.length - 1; i++) {
-                        letterBoxes[i].value = '';
+                    for (let i = 0; i < letterBoxes.length; i++) {
+                        if (i < word.length) {
+                            letterBoxes[i].value = word[i].toUpperCase();
+                        } else {
+                            letterBoxes[i].value = '';
+                        }
                     }
                     
                     updateResults();
                 });
             });
+            
+            // Show message if we're displaying only a subset of results
+            if (matches.length > displayLimit) {
+                const moreMessage = document.createElement('div');
+                moreMessage.className = 'more-results';
+                moreMessage.textContent = `Showing ${displayLimit} of ${matches.length} matches. Add more letters to narrow results.`;
+                resultsContainer.appendChild(moreMessage);
+            }
         }
     }
 });
