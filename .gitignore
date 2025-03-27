@@ -12,8 +12,10 @@ node_modules/
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
-package-lock.json
-yarn.lock
+
+# Keep package lock files (best practice for reproducible builds)
+# package-lock.json
+# yarn.lock
 
 # Build directories
 /dist
@@ -38,21 +40,16 @@ yarn.lock
 # Log files
 logs/
 *.log
-npm-debug.log*
-
-# Dependency directories
-jspm_packages/
-bower_components/
 
 # Cache directories
+.cache/
 .npm/
 .eslintcache
-.stylelintcache
-.rpt2_cache/
-.rts2_cache_cjs/
-.rts2_cache_es/
-.rts2_cache_umd/
 
-# Temporary files
-tmp/
-temp/
+# Browser-specific files
+*.icloud
+
+# Local backups
+*.bak
+*~
+*.swp
