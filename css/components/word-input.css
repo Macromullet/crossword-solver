@@ -9,14 +9,16 @@
 .word-input {
     display: flex;
     justify-content: center;
-    margin: 20px auto 30px;
-    padding: 20px;
+    margin: 30px auto 40px; /* Increased for more breathing room */
+    padding: 25px; /* Increased padding */
     position: relative;
 }
 
 .crossword-container {
     position: relative;
     display: inline-flex;
+    margin: 8px 0; /* Added margin for better vertical spacing */
+    filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1)); /* Subtle shadow for depth */
 }
 
 .crossword-border {
@@ -30,8 +32,8 @@
 }
 
 .letter-box {
-    width: 50px;
-    height: 50px;
+    width: 54px; /* Slightly larger for better visual presence */
+    height: 54px; /* Kept square */
     text-align: center;
     font-size: 28px;
     font-weight: bold;
@@ -50,12 +52,13 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .word-input {
-        padding: 10px 5px;
+        padding: 15px 8px; /* Increased from 10px 5px */
+        margin: 25px auto 35px; /* More balanced spacing */
     }
     
     .letter-box {
-        width: 40px;
-        height: 40px;
+        width: 42px; /* Adjusted from 40px */
+        height: 42px;
         font-size: 22px;
     }
 }

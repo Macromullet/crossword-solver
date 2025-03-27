@@ -7,18 +7,19 @@
 
 /* Results Container */
 .results {
-    margin: 20px auto;
+    margin: 30px auto; /* Increased from 20px for more breathing room */
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    max-height: 400px;
+    max-height: 420px; /* Slightly increased from 400px */
     overflow-y: auto;
-    padding: 15px;
+    padding: 20px; /* Increased from 15px */
     width: 100%;
     max-width: 800px;
-    border-radius: 10px;
+    border-radius: 12px; /* Increased from 10px */
     opacity: 0;
     transition: opacity 0.3s ease;
+    gap: 4px; /* Added gap between items */
 }
 
 .results.has-results {
@@ -28,50 +29,57 @@
 .result-header {
     width: 100%;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 25px; /* Increased from 20px */
     font-weight: bold;
-    font-size: 18px;
+    font-size: 19px; /* Slightly larger from 18px */
+    letter-spacing: 0.3px; /* Added for typography refinement */
 }
 
 .loading {
     width: 100%;
     text-align: center;
     font-style: italic;
-    padding: 20px;
+    padding: 25px; /* Increased from 20px */
 }
 
 .no-matches {
     width: 100%;
     text-align: center;
     font-style: italic;
-    padding: 20px;
+    padding: 25px; /* Increased from 20px */
     font-size: 18px;
 }
 
 /* Result Word Style */
 .result-word {
-    margin: 6px;
-    padding: 10px 15px;
+    margin: 8px; /* Increased from 6px */
+    padding: 12px 18px; /* Increased from 10px 15px */
     cursor: pointer;
     transition: all 0.3s ease;
     font-size: 17px;
     display: inline-block;
+    border-radius: 6px; /* Added for softer appearance */
 }
 
 .more-results {
     width: 100%;
     text-align: center;
-    margin-top: 15px;
-    padding: 10px;
+    margin-top: 20px; /* Increased from 15px */
+    padding: 12px; /* Increased from 10px */
     font-style: italic;
     color: #666;
 }
 
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
+    .results {
+        margin: 25px auto; /* Balanced for mobile */
+        padding: 15px;
+    }
+    
     .result-word {
         font-size: 16px;
-        margin: 4px;
-        padding: 8px 12px;
+        margin: 5px; /* Increased from 4px */
+        padding: 9px 14px; /* Increased from 8px 12px */
     }
 }
