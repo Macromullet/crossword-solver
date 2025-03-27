@@ -13,6 +13,7 @@
 @import 'components/controls.css';
 @import 'components/word-input.css';
 @import 'components/results.css';
+@import 'components/accessibility.css';
 
 /* Import Theme Styles */
 @import 'themes/newspaper-theme.css';
