@@ -1,22 +1,43 @@
 # Crossword Solver
-
 A fast, browser-based crossword puzzle word finder that helps you discover words matching a specific pattern.
 
-## Usage
+## Features
+- **Instant Results**: See matching words as you type with no delay
+- **Multiple Themes**: Choose from 6 different visual themes including Google Material Design, Apple Human Interface, and Microsoft Fluent Design
+- **Responsive Design**: Works seamlessly on desktop and mobile devices
+- **Accessibility Support**: Screen reader compatible with keyboard navigation
+- **PWA Support**: Can be installed as a Progressive Web App for offline use
 
+## Usage
 1. Access the application through a web browser (open `index.html` or serve via a local web server)
-2. Enter the desired word size (between 2-15 letters)
-3. Click "Generate Boxes"
+2. Select your preferred visual theme from the dropdown
+3. Adjust the word size slider to set your desired word length (between 2-15 letters)
 4. Type letters in the boxes where you know them, leave unknown positions blank
 5. Matching words will appear instantly as you type
 6. Click on any matching word to fill it into the boxes
+7. Use the "Clear All" button to reset your input
+
+## Available Themes
+The application offers six professionally designed themes:
+- **Newspaper**: Classic, elegant styling inspired by print crosswords
+- **Modern**: Clean, contemporary design with minimal styling
+- **Google**: Implementation of Google's Material Design guidelines
+- **Apple**: Implementation of Apple's Human Interface Guidelines
+- **Microsoft**: Implementation of Microsoft's Fluent Design System
+- **Silly**: A playful design with random rotations for a fun experience
+
+## Accessibility
+The Crossword Solver is built with accessibility in mind:
+- Full keyboard navigation support
+- Screen reader compatibility with ARIA attributes
+- High contrast options
+- Focus indicators for keyboard users
+- Skip-to-content link for keyboard navigation
 
 ## Technical Implementation
-
 This application uses a highly optimized bit-manipulation algorithm to provide instant search results as you type. Originally written in C# and converted to JavaScript, the solver preprocesses the dictionary to enable extremely fast pattern matching.
 
 ### Core Algorithm
-
 The crossword solver uses a sophisticated bit-masking technique that revolutionizes how pattern matching is performed:
 
 1. **Dictionary Preprocessing**:
@@ -43,26 +64,36 @@ The crossword solver uses a sophisticated bit-masking technique that revolutioni
    - Pattern matching is constant time regardless of dictionary size
 
 ### System Architecture
-
 The application consists of three main components:
-
 1. **User Interface Layer**:
    - HTML/CSS for rendering the interface
+   - Multiple theme options using separate CSS files
    - JavaScript event handlers for real-time interaction
-   - Reactive results display that updates as the user types
-
+   - Responsive design that works on various screen sizes
+   - Accessibility features for inclusive user experience
 2. **Pattern Matcher**:
    - Converts UI input to the appropriate query pattern
    - Handles special cases and input validation
    - Manages the communication between UI and solver
-
 3. **Fast Solver Engine**:
    - The core FastCrosswordSolver class that implements the bit-manipulation algorithm
-   - Dictionary loading and preprocessing logic
-   - Fallback mechanisms for handling network failures
+   - In-memory processing for constant-time pattern matching
+   - Optimized for performance with BigInt operations
 
 The application first loads and preprocesses the dictionary, then provides an interactive interface for users to find words matching their specified patterns.
 
-## License
+## Progressive Web App
+The Crossword Solver is implemented as a Progressive Web App (PWA), which means:
+- It can be installed on your device's home screen
+- It works offline once the dictionary has been cached
+- It provides a native app-like experience
 
-This project is licensed under the MIT License - see the [LICENSE.md](../LICENSE.md) file for details.
+## Browser Compatibility
+The application is compatible with:
+- Chrome/Edge (latest versions)
+- Firefox (latest versions)
+- Safari (latest versions)
+- Mobile browsers (iOS Safari, Android Chrome)
+
+## License
+This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details.
