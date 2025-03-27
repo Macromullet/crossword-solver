@@ -60,7 +60,17 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear previous boxes and results
         wordInputContainer.innerHTML = '';
         resultsContainer.innerHTML = '';
+        resultsContainer.classList.remove('has-results');
         letterBoxes = [];
+        
+        // Create crossword container with border
+        const crosswordContainer = document.createElement('div');
+        crosswordContainer.className = 'crossword-container';
+        
+        // Add the border element
+        const borderElement = document.createElement('div');
+        borderElement.className = 'crossword-border';
+        crosswordContainer.appendChild(borderElement);
         
         // Create new letter boxes
         for (let i = 0; i < size; i++) {
@@ -123,9 +133,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
             
+            // Add the input to the crossword container
+            crosswordContainer.appendChild(input);
             letterBoxes.push(input);
-            wordInputContainer.appendChild(input);
         }
+        
+        // Add the crossword container to the word input container
+        wordInputContainer.appendChild(crosswordContainer);
         
         // Focus on the first box
         if (letterBoxes.length > 0) {
@@ -154,13 +168,17 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Skip search if no letters entered
+        // Skip search and hide results if no letters entered
         if (!hasLetters) {
+            resultsContainer.classList.remove('has-results');
             return;
         }
         
         // Find matching words using our fast solver
         const matches = solver.query(pattern, '.');
+        
+        // Show results container
+        resultsContainer.classList.add('has-results');
         
         // Display results
         if (matches.length === 0) {

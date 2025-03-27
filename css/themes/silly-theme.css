@@ -1,0 +1,124 @@
+/*
+ * Copyright (c) 2025 Brooke Philpott
+ * 
+ * This file is part of the Crossword Solver application.
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+
+/* Silly Theme - Playful and fun */
+.silly-theme {
+    background: linear-gradient(135deg, #fefefe 0%, #ffed9e 50%, #ffcfdf 100%);
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+    color: #333;
+}
+
+.silly-theme h1 {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+    color: #ff6b6b;
+    text-shadow: 3px 3px 0px #ffb5b5;
+    transform: rotate(-1deg);
+    font-size: 46px;
+}
+
+/* Controls */
+.silly-theme .theme-selector {
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 3px dotted #ffcc29;
+    transform: rotate(1deg);
+}
+
+.silly-theme .btn-reset {
+    background-color: #ff6b6b;
+    border: 2px dashed #ffee93;
+    transform: rotate(-2deg);
+}
+
+.silly-theme .btn-reset:hover {
+    background-color: #ff4d4d;
+    transform: rotate(2deg);
+}
+
+.silly-theme .slider {
+    background: linear-gradient(to right, #ffcc29, #ff9aa2, #a5c8ff);
+    border: 2px dotted #ff9aa2;
+    height: 10px;
+}
+
+.silly-theme .slider::-webkit-slider-thumb {
+    background: #ff6b6b;
+    border: 2px dashed #ffee93;
+    width: 25px;
+    height: 25px;
+}
+
+.silly-theme .slider::-moz-range-thumb {
+    background: #ff6b6b;
+    border: 2px dashed #ffee93;
+    width: 25px;
+    height: 25px;
+}
+
+.silly-theme .word-size-control {
+    transform: rotate(-1deg);
+}
+
+/* Word Input */
+.silly-theme .letter-box {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+    background-color: #fdffb6;
+    border-right: 2px dotted #ff9aa2;
+}
+
+.silly-theme .letter-box:focus {
+    background-color: #ffee93;
+    animation: wiggle 0.5s infinite;
+}
+
+.silly-theme .crossword-border {
+    border: 4px dashed #ffcc29;
+    border-radius: 10px;
+    transform: rotate(-0.5deg);
+}
+
+/* Results */
+.silly-theme .results {
+    background-color: rgba(255, 255, 255, 0.6);
+    border: 3px dotted #9bf6ff;
+    transform: rotate(-0.5deg);
+}
+
+.silly-theme .result-header {
+    color: #3a0ca3;
+    transform: rotate(1deg);
+    font-size: 20px;
+}
+
+.silly-theme .result-word {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+    background-color: #caffbf;
+    border: 2px dotted #9bf6ff;
+    border-radius: 16px;
+    color: #3a0ca3;
+    transform: rotate(var(--random-rotate));
+}
+
+.silly-theme .result-word:hover {
+    animation: bounce 0.5s infinite alternate;
+    background-color: #fdffb6;
+}
+
+.silly-theme .no-matches {
+    color: #ff4d4d;
+    transform: rotate(-2deg);
+}
+
+/* Animations */
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+@keyframes bounce {
+    from { transform: translateY(0) rotate(var(--random-rotate)); }
+    to { transform: translateY(-10px) rotate(var(--random-rotate)); }
+}

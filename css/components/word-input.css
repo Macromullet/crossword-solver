@@ -1,0 +1,77 @@
+/*
+ * Copyright (c) 2025 Brooke Philpott
+ * 
+ * This file is part of the Crossword Solver application.
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+
+/* Word Input - Crossword Entry Style */
+.word-input {
+    display: flex;
+    justify-content: center;
+    margin: 20px auto 30px;
+    padding: 20px;
+    position: relative;
+}
+
+.crossword-container {
+    position: relative;
+    display: inline-flex;
+}
+
+.crossword-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 3px solid #000;
+    pointer-events: none;
+}
+
+.letter-box {
+    width: 50px;
+    height: 50px;
+    text-align: center;
+    font-size: 28px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: all 0.2s ease;
+    border: none;
+    border-right: 1px solid #999;
+    margin: 0;
+    padding: 0;
+}
+
+.letter-box:last-child {
+    border-right: none;
+}
+
+/* Mobile Responsive Styles */
+@media (max-width: 768px) {
+    .word-input {
+        padding: 10px 5px;
+    }
+    
+    .letter-box {
+        width: 40px;
+        height: 40px;
+        font-size: 22px;
+    }
+}
+
+@media (max-width: 480px) {
+    .letter-box {
+        width: 32px;
+        height: 32px;
+        font-size: 18px;
+    }
+}
+
+@media (max-width: 360px) {
+    .letter-box {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
+    }
+}

@@ -227,22 +227,46 @@ h1 {
     line-height: 1.4;
 }
 
+/* Word Input - Crossword Entry Style */
 .word-input {
     display: flex;
-    flex-wrap: wrap;
     justify-content: center;
-    margin: 10px auto 30px;
-    gap: 10px;
+    margin: 20px auto 30px;
     padding: 20px;
+    position: relative;
+}
+
+.crossword-container {
+    position: relative;
+    display: inline-flex;
+}
+
+.crossword-border {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border: 3px solid #000;
+    pointer-events: none;
 }
 
 .letter-box {
     width: 50px;
     height: 50px;
     text-align: center;
-    font-size: 24px;
+    font-size: 28px;
+    font-weight: bold;
     text-transform: uppercase;
     transition: all 0.2s ease;
+    border: none;
+    border-right: 1px solid #999;
+    margin: 0;
+    padding: 0;
+}
+
+.letter-box:last-child {
+    border-right: none;
 }
 
 /* Common Results Styles */
@@ -257,6 +281,12 @@ h1 {
     width: 100%;
     max-width: 800px;
     border-radius: 10px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.results.has-results {
+    opacity: 1;
 }
 
 .result-header {
@@ -326,15 +356,17 @@ h1 {
 .newspaper-theme .letter-box {
     font-family: 'Georgia', 'Times New Roman', serif;
     background-color: white;
-    border: 2px solid #000;
-    font-weight: bold;
-    box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.05);
+    border-right: 1px solid #444;
+    box-shadow: inset 0 -1px 0 rgba(0, 0, 0, 0.05);
 }
 
 .newspaper-theme .letter-box:focus {
-    border-color: #2b5797;
+    background-color: #f9f7f1;
     outline: none;
-    box-shadow: 0 0 0 3px rgba(43, 87, 151, 0.25);
+}
+
+.newspaper-theme .crossword-border {
+    border: 2px solid #000;
 }
 
 .newspaper-theme .results {
@@ -412,16 +444,20 @@ h1 {
 
 .modern-theme .letter-box {
     font-family: 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
-    border: none;
-    border-radius: 12px;
+    border-right: 1px solid #cbd5e1;
     background-color: #fff;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.06);
 }
 
 .modern-theme .letter-box:focus {
-    transform: translateY(-3px);
-    box-shadow: 0 8px 25px rgba(37, 99, 235, 0.15);
-    outline: 2px solid #2563eb;
+    background-color: #f1f5f9;
+    outline: none;
+}
+
+.modern-theme .crossword-border {
+    border: 3px solid #2563eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.15);
+    overflow: hidden;
 }
 
 .modern-theme .results {
@@ -508,16 +544,19 @@ h1 {
 
 .silly-theme .letter-box {
     font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
-    border: 3px dashed #ffcc29;
-    border-radius: 15px;
     background-color: #fdffb6;
-    transform: rotate(var(--random-rotate));
+    border-right: 2px dotted #ff9aa2;
 }
 
 .silly-theme .letter-box:focus {
-    animation: wiggle 0.5s infinite;
     background-color: #ffee93;
-    border-color: #ff9aa2;
+    animation: wiggle 0.5s infinite;
+}
+
+.silly-theme .crossword-border {
+    border: 4px dashed #ffcc29;
+    border-radius: 10px;
+    transform: rotate(-0.5deg);
 }
 
 .silly-theme .results {
@@ -608,7 +647,7 @@ h1 {
     .letter-box {
         width: 40px;
         height: 40px;
-        font-size: 20px;
+        font-size: 22px;
     }
     
     .result-word {
@@ -626,8 +665,8 @@ h1 {
 /* Small Mobile Styles */
 @media (max-width: 480px) {
     .letter-box {
-        width: 35px;
-        height: 35px;
+        width: 32px;
+        height: 32px;
         font-size: 18px;
     }
     
@@ -637,5 +676,14 @@ h1 {
     
     .controls {
         gap: 12px;
+    }
+}
+
+/* Tiny Mobile Screens */
+@media (max-width: 360px) {
+    .letter-box {
+        width: 28px;
+        height: 28px;
+        font-size: 16px;
     }
 }
