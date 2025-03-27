@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2025 Brooke Philpott
+ * 
+ * This file is part of the Crossword Solver application.
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+
 // This file will load and process the dictionary using a fast bit-manipulation algorithm
 
 // Dictionary array that will be available to app.js

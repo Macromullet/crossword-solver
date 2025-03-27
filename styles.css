@@ -1,3 +1,10 @@
+/*
+ * Copyright (c) 2025 Brooke Philpott
+ * 
+ * This file is part of the Crossword Solver application.
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+
 * {
     box-sizing: border-box;
     margin: 0;
@@ -83,7 +90,30 @@ h1 {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 20px;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.theme-selector {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.theme-selector select {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid #ccc;
+    background-color: white;
+    cursor: pointer;
+}
+
+.info-text {
+    font-size: 16px;
+    color: #666;
+    font-style: italic;
+    text-align: center;
 }
 
 .controls label {
@@ -169,4 +199,127 @@ h1 {
 .result-word:hover {
     background-color: #e0e0e0;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+/* Newspaper Theme */
+.newspaper-theme {
+    background-color: #fff8ee;
+    font-family: 'Times New Roman', serif;
+}
+
+.newspaper-theme h1 {
+    font-family: 'Times New Roman', serif;
+    font-weight: bold;
+    font-size: 36px;
+    letter-spacing: -1px;
+    color: #111;
+}
+
+.newspaper-theme .letter-box {
+    font-family: 'Times New Roman', serif;
+    background-color: white;
+    border: 2px solid #000;
+    font-weight: bold;
+    box-shadow: 2px 2px 2px rgba(0,0,0,0.1);
+}
+
+.newspaper-theme .result-word {
+    font-family: 'Times New Roman', serif;
+    background-color: #f8f4eb;
+    border: 1px solid #ddd;
+    color: #444;
+}
+
+.newspaper-theme .result-word:hover {
+    background-color: #eae4d7;
+}
+
+/* Modern Theme */
+.modern-theme {
+    background-color: #f7f9fc;
+    font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+.modern-theme h1 {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    color: #3a86ff;
+    letter-spacing: -0.5px;
+}
+
+.modern-theme .letter-box {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    border: none;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.modern-theme .letter-box:focus {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+    outline: 2px solid #3a86ff;
+}
+
+.modern-theme .result-word {
+    font-family: 'Helvetica', 'Arial', sans-serif;
+    background: linear-gradient(145deg, #ffffff, #f0f3f8);
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: all 0.3s ease;
+}
+
+.modern-theme .result-word:hover {
+    background: linear-gradient(145deg, #f0f3f8, #ffffff);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+/* Silly Theme */
+.silly-theme {
+    background-color: #fffde7;
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+}
+
+.silly-theme h1 {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+    color: #ff6b6b;
+    text-shadow: 2px 2px 0px #ffb5b5;
+    transform: rotate(-1deg);
+}
+
+.silly-theme .letter-box {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+    border: 3px dashed #ffcc29;
+    border-radius: 12px;
+    background-color: #fdffb6;
+    transform: rotate(var(--random-rotate));
+}
+
+.silly-theme .letter-box:focus {
+    animation: wiggle 0.5s infinite;
+}
+
+.silly-theme .result-word {
+    font-family: 'Comic Sans MS', 'Chalkboard SE', cursive;
+    background-color: #caffbf;
+    border: 2px dotted #9bf6ff;
+    border-radius: 16px;
+    color: #3a0ca3;
+    transform: rotate(var(--random-rotate));
+}
+
+.silly-theme .result-word:hover {
+    animation: bounce 0.5s infinite alternate;
+    background-color: #fdffb6;
+}
+
+@keyframes wiggle {
+    0%, 100% { transform: rotate(-3deg); }
+    50% { transform: rotate(3deg); }
+}
+
+@keyframes bounce {
+    from { transform: translateY(0) rotate(var(--random-rotate)); }
+    to { transform: translateY(-10px) rotate(var(--random-rotate)); }
 }

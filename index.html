@@ -1,4 +1,10 @@
 <!DOCTYPE html>
+<!--
+  Copyright (c) 2025 Brooke Philpott
+  
+  This file is part of the Crossword Solver application.
+  Licensed under the MIT License. See LICENSE.md for details.
+-->
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -20,17 +26,27 @@
         </div>
         <div id="loading-progress">Initializing...</div>
     </div>
-
-    <div id="main-container" class="container hidden">
+    
+    <div id="main-container" class="container hidden newspaper-theme">
         <h1>Crossword Solver</h1>
+        
         <div class="controls">
-            <label for="word-size">Word Size:</label>
-            <input type="number" id="word-size" min="2" max="15" value="5">
-            <button id="generate-btn">Generate Boxes</button>
+            <div class="theme-selector">
+                <label for="theme-picker">Theme:</label>
+                <select id="theme-picker">
+                    <option value="newspaper">Newspaper</option>
+                    <option value="modern">Modern</option>
+                    <option value="silly">Silly</option>
+                </select>
+            </div>
+            
+            <div class="info-text">Press Space to add a new box. Type letters for known positions.</div>
         </div>
+        
         <div id="word-input" class="word-input"></div>
         <div id="results" class="results"></div>
     </div>
+    
     <script src="dictionary.js"></script>
     <script src="app.js"></script>
 </body>
