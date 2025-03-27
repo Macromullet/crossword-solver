@@ -1,0 +1,192 @@
+/*
+ * Copyright (c) 2025 Brooke Philpott
+ * 
+ * This file is part of the Crossword Solver application.
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+/* Microsoft Fluent Design Theme */
+.microsoft-theme {
+    background-color: #faf9f8;
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', 'Segoe UI', -apple-system, BlinkMacSystemFont, Roboto, 'Helvetica Neue', sans-serif;
+    color: #201f1e;
+    --ms-primary: #0078d4;
+    --ms-primary-hover: #106ebe;
+    --ms-text: #201f1e;
+    --ms-text-secondary: #605e5c;
+    --ms-border: #8a8886;
+    --ms-border-light: #edebe9;
+    --ms-surface: #ffffff;
+    --ms-surface-alt: #faf9f8;
+    --ms-error: #a80000;
+    --ms-shadow: rgba(0, 0, 0, 0.133);
+    --ms-radius: 2px;
+}
+
+.microsoft-theme h1 {
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', -apple-system, BlinkMacSystemFont, sans-serif;
+    font-weight: 600;
+    font-size: 32px;
+    color: var(--ms-text);
+    margin-bottom: 28px;
+}
+
+/* Controls */
+.microsoft-theme .theme-selector {
+    background-color: var(--ms-surface);
+    border-radius: var(--ms-radius);
+    box-shadow: 0 1.6px 3.6px 0 var(--ms-shadow), 0 0.3px 0.9px 0 var(--ms-shadow);
+    padding: 16px;
+    border: 1px solid var(--ms-border-light);
+}
+
+.microsoft-theme .theme-selector label {
+    font-weight: 600;
+    color: var(--ms-text);
+    font-size: 14px;
+}
+
+.microsoft-theme .theme-selector select {
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', sans-serif;
+    background-color: var(--ms-surface);
+    border: 1px solid var(--ms-border);
+    border-radius: var(--ms-radius);
+    padding: 8px 12px;
+    color: var(--ms-text);
+    font-size: 14px;
+    height: 32px;
+}
+
+.microsoft-theme .theme-selector select:focus {
+    border-color: var(--ms-primary);
+    outline: none;
+}
+
+.microsoft-theme .btn-reset {
+    background-color: var(--ms-primary);
+    color: white;
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', sans-serif;
+    font-weight: 600;
+    border-radius: var(--ms-radius);
+    box-shadow: none;
+    font-size: 14px;
+    height: 32px;
+    padding: 0 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.microsoft-theme .btn-reset:hover {
+    background-color: var(--ms-primary-hover);
+    transform: none;
+    box-shadow: none;
+}
+
+.microsoft-theme .slider {
+    background-color: var(--ms-border-light);
+    border: none;
+    height: 4px;
+}
+
+.microsoft-theme .slider::-webkit-slider-thumb {
+    background: var(--ms-primary);
+    border: 2px solid var(--ms-primary);
+    width: 16px;
+    height: 16px;
+    box-shadow: none;
+}
+
+.microsoft-theme .slider::-moz-range-thumb {
+    background: var(--ms-primary);
+    border: 2px solid var(--ms-primary);
+    width: 16px;
+    height: 16px;
+    box-shadow: none;
+}
+
+.microsoft-theme .word-size-control label {
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ms-text);
+}
+
+/* Word Input */
+.microsoft-theme .letter-box {
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', sans-serif;
+    background-color: var(--ms-surface);
+    border-right: 1px solid var(--ms-border-light);
+    font-weight: 600;
+}
+
+.microsoft-theme .letter-box:focus {
+    background-color: var(--ms-surface);
+    outline: 2px solid var(--ms-primary);
+    outline-offset: -2px;
+    z-index: 1;
+}
+
+.microsoft-theme .crossword-container {
+    box-shadow: 0 1.6px 3.6px 0 var(--ms-shadow), 0 0.3px 0.9px 0 var(--ms-shadow);
+}
+
+.microsoft-theme .crossword-border {
+    border: 1px solid var(--ms-border);
+}
+
+/* Results */
+.microsoft-theme .results {
+    background-color: var(--ms-surface);
+    border-radius: var(--ms-radius);
+    box-shadow: 0 1.6px 3.6px 0 var(--ms-shadow), 0 0.3px 0.9px 0 var(--ms-shadow);
+    padding: 20px;
+    border: 1px solid var(--ms-border-light);
+}
+
+.microsoft-theme .result-header {
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', sans-serif;
+    font-weight: 600;
+    color: var(--ms-text);
+    font-size: 18px;
+}
+
+.microsoft-theme .result-word {
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', sans-serif;
+    background-color: var(--ms-surface-alt);
+    color: var(--ms-text);
+    border: 1px solid var(--ms-border-light);
+    border-radius: var(--ms-radius);
+    transition: all 0.1s ease;
+    font-size: 14px;
+    padding: 6px 12px;
+}
+
+.microsoft-theme .result-word:hover {
+    background-color: #f3f2f1;
+    border-color: var(--ms-border);
+}
+
+.microsoft-theme .no-matches {
+    color: var(--ms-error);
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', sans-serif;
+}
+
+.microsoft-theme .info-text {
+    color: var(--ms-text-secondary);
+    font-family: 'Segoe UI', 'Segoe UI Web (West European)', sans-serif;
+    font-size: 12px;
+    line-height: 1.5;
+}
+
+/* Accessibility Controls */
+.microsoft-theme .accessibility-panel {
+    background-color: var(--ms-surface);
+    border-radius: var(--ms-radius);
+    box-shadow: 0 1.6px 3.6px 0 var(--ms-shadow), 0 0.3px 0.9px 0 var(--ms-shadow);
+    border: 1px solid var(--ms-border-light);
+}
+
+.microsoft-theme .accessibility-toggle {
+    background-color: var(--ms-primary);
+    color: white;
+}

@@ -7,19 +7,35 @@
 
 /* Results Container */
 .results {
-    margin: 30px auto; /* Increased from 20px for more breathing room */
+    margin: 10px auto 0;
     display: flex;
     flex-wrap: wrap;
-    justify-content: center;
-    max-height: 420px; /* Slightly increased from 400px */
+    justify-content: flex-start; /* Changed from center to flex-start for consistent layout */
+    align-content: flex-start; /* Added to ensure rows stack tightly from the top */
+    height: 100%;
+    flex-grow: 1;
     overflow-y: auto;
-    padding: 20px; /* Increased from 15px */
+    padding: 12px;
     width: 100%;
     max-width: 800px;
-    border-radius: 12px; /* Increased from 10px */
+    border-radius: 8px;
     opacity: 0;
     transition: opacity 0.3s ease;
-    gap: 4px; /* Added gap between items */
+    scrollbar-width: thin; /* For Firefox */
+    -ms-overflow-style: auto; /* For IE and Edge */
+    min-height: 200px; /* Added minimum height */
+    row-gap: 8px; /* Fixed consistent row gap */
+    column-gap: 8px; /* Added specific column-gap */
+}
+
+.results::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+}
+
+.results::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 4px;
 }
 
 .results.has-results {
@@ -29,9 +45,9 @@
 .result-header {
     width: 100%;
     text-align: center;
-    margin-bottom: 25px; /* Increased from 20px */
+    margin-bottom: 15px; /* Reduced from 25px */
     font-weight: bold;
-    font-size: 19px; /* Slightly larger from 18px */
+    font-size: 18px; /* Reduced from 19px */
     letter-spacing: 0.3px; /* Added for typography refinement */
 }
 
@@ -39,35 +55,41 @@
     width: 100%;
     text-align: center;
     font-style: italic;
-    padding: 25px; /* Increased from 20px */
+    padding: 15px; /* Reduced from 25px */
 }
 
 .no-matches {
     width: 100%;
     text-align: center;
     font-style: italic;
-    padding: 25px; /* Increased from 20px */
-    font-size: 18px;
+    padding: 15px; /* Reduced from 25px */
+    font-size: 17px; /* Reduced from 18px */
 }
 
 /* Result Word Style */
 .result-word {
-    margin: 8px; /* Increased from 6px */
-    padding: 12px 18px; /* Increased from 10px 15px */
+    margin: 0; /* Removed margin since we're using gap now */
+    padding: 6px 12px; /* Slightly reduced and more consistent padding */
     cursor: pointer;
     transition: all 0.3s ease;
-    font-size: 17px;
-    display: inline-block;
-    border-radius: 6px; /* Added for softer appearance */
+    font-size: 16px;
+    display: inline-flex; /* Changed from inline-block to inline-flex */
+    align-items: center; /* Center content vertically */
+    justify-content: center; /* Center content horizontally */
+    border-radius: 4px;
+    height: 32px; /* Fixed height for all result words */
+    box-sizing: border-box; /* Ensure padding is included in height calculation */
+    line-height: 1; /* Reset line height to prevent inconsistent spacing */
 }
 
 .more-results {
     width: 100%;
     text-align: center;
-    margin-top: 20px; /* Increased from 15px */
-    padding: 12px; /* Increased from 10px */
+    margin-top: 12px; /* Reduced from 20px */
+    padding: 8px; /* Reduced from 12px */
     font-style: italic;
     color: #666;
+    font-size: 14px; /* Added smaller font size */
 }
 
 /* Mobile Responsive Styles */
@@ -75,11 +97,14 @@
     .results {
         margin: 25px auto; /* Balanced for mobile */
         padding: 15px;
+        row-gap: 3px; /* Slightly reduced for mobile */
+        column-gap: 6px; /* Slightly reduced for mobile */
     }
     
     .result-word {
-        font-size: 16px;
-        margin: 5px; /* Increased from 4px */
-        padding: 9px 14px; /* Increased from 8px 12px */
+        font-size: 15px;
+        margin: 0;
+        padding: 6px 10px;
+        height: 30px; /* Slightly smaller fixed height for mobile */
     }
 }

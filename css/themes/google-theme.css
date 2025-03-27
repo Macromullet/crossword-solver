@@ -1,0 +1,166 @@
+/*
+ * Copyright (c) 2025 Brooke Philpott
+ * 
+ * This file is part of the Crossword Solver application.
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+/* Google Material Design Theme (Based on Material Design 3) */
+.google-theme {
+    background-color: #f8f9fa;
+    font-family: 'Roboto', 'Segoe UI', 'Helvetica Neue', Arial, sans-serif;
+    color: #1f1f1f;
+    --md-primary: #1a73e8;
+    --md-primary-container: #e8f0fe;
+    --md-on-primary: #ffffff;
+    --md-secondary: #4285f4;
+    --md-error: #d93025;
+    --md-surface: #ffffff;
+    --md-surface-variant: #f1f3f4;
+    --md-on-surface: #1f1f1f;
+    --md-outline: #dadce0;
+    --md-shadow: rgba(60, 64, 67, 0.3);
+    --md-radius: 8px;
+}
+
+.google-theme h1 {
+    font-family: 'Google Sans', 'Roboto', 'Segoe UI', sans-serif;
+    font-weight: 500;
+    font-size: 32px;
+    color: var(--md-on-surface);
+    margin-bottom: 40px;
+    letter-spacing: -0.5px;
+}
+
+/* Controls */
+.google-theme .theme-selector {
+    background-color: var(--md-surface);
+    border-radius: var(--md-radius);
+    box-shadow: 0 1px 3px var(--md-shadow);
+}
+
+.google-theme .theme-selector select {
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    border: 1px solid var(--md-outline);
+    border-radius: var(--md-radius);
+    padding: 12px 16px;
+    color: var(--md-on-surface);
+}
+
+.google-theme .btn-reset {
+    background-color: var(--md-primary);
+    color: var(--md-on-primary);
+    font-family: 'Google Sans', 'Roboto', sans-serif;
+    font-weight: 500;
+    border-radius: 20px;
+    box-shadow: 0 1px 3px var(--md-shadow);
+    text-transform: uppercase;
+    font-size: 14px;
+    letter-spacing: 0.25px;
+    padding: 10px 24px;
+}
+
+.google-theme .btn-reset:hover {
+    background-color: #1565c0;
+    box-shadow: 0 2px 6px var(--md-shadow);
+}
+
+.google-theme .slider {
+    background-color: var(--md-outline);
+    border-radius: 4px;
+    height: 4px;
+}
+
+.google-theme .slider::-webkit-slider-thumb {
+    background: var(--md-primary);
+    border: none;
+    box-shadow: 0 1px 3px var(--md-shadow);
+    width: 18px;
+    height: 18px;
+}
+
+.google-theme .slider::-moz-range-thumb {
+    background: var(--md-primary);
+    border: none;
+    box-shadow: 0 1px 3px var(--md-shadow);
+    width: 18px;
+    height: 18px;
+}
+
+.google-theme .word-size-control label {
+    font-family: 'Google Sans', 'Roboto', sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--md-on-surface);
+}
+
+/* Word Input */
+.google-theme .letter-box {
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    background-color: var(--md-surface);
+    border-right: 1px solid var(--md-outline);
+    transition: background-color 0.15s ease;
+}
+
+.google-theme .letter-box:focus {
+    background-color: var(--md-primary-container);
+    outline: 2px solid var(--md-primary);
+    z-index: 1;
+}
+
+.google-theme .crossword-container {
+    box-shadow: 0 2px 6px var(--md-shadow);
+}
+
+.google-theme .crossword-border {
+    border: 2px solid var(--md-outline);
+    border-radius: 4px;
+}
+
+/* Results */
+.google-theme .results {
+    background-color: var(--md-surface);
+    border-radius: var(--md-radius);
+    box-shadow: 0 2px 6px var(--md-shadow);
+}
+
+.google-theme .result-header {
+    font-family: 'Google Sans', 'Roboto', sans-serif;
+    font-weight: 500;
+    color: var(--md-on-surface);
+}
+
+.google-theme .result-word {
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+    background-color: var(--md-surface-variant);
+    color: var(--md-on-surface);
+    border-radius: var(--md-radius);
+    transition: all 0.15s ease;
+    border: none;
+}
+
+.google-theme .result-word:hover {
+    background-color: var(--md-primary-container);
+    box-shadow: 0 1px 2px var(--md-shadow);
+}
+
+.google-theme .no-matches {
+    color: var(--md-error);
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+.google-theme .info-text {
+    color: #5f6368;
+    font-family: 'Roboto', 'Segoe UI', sans-serif;
+}
+
+/* Accessibility Controls */
+.google-theme .accessibility-panel {
+    background-color: var(--md-surface);
+    border-radius: var(--md-radius);
+    box-shadow: 0 2px 6px var(--md-shadow);
+}
+
+.google-theme .accessibility-toggle {
+    background-color: var(--md-primary);
+    color: var(--md-on-primary);
+}

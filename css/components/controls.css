@@ -10,10 +10,10 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    gap: 32px; /* Increased from 20px for better vertical rhythm */
-    margin-bottom: 45px; /* Increased from 35px to provide more separation */
+    gap: 15px; /* Further reduced from 20px */
+    margin-bottom: 15px; /* Reduced from 25px */
     width: 100%;
-    padding: 10px 0;
+    padding: 5px 0;
 }
 
 /* Word Size Slider */
@@ -21,16 +21,16 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 18px; /* Increased from 10px to create more breathing room */
+    gap: 8px; /* Further reduced from 12px */
     width: 100%;
-    max-width: 320px; /* Slightly increased for better proportion */
-    padding: 8px 0; /* Added padding for vertical breathing room */
+    max-width: 320px;
+    padding: 0;
 }
 
 .word-size-control label {
-    font-size: 18px;
+    font-size: 17px; /* Reduced from 18px */
     font-weight: 600;
-    margin-bottom: 6px; /* Added spacing between label and content */
+    margin-bottom: 3px; /* Reduced from 6px */
 }
 
 .slider-container {
@@ -75,10 +75,10 @@
 .theme-selector {
     display: flex;
     align-items: center;
-    gap: 18px; /* Increased from 15px */
-    padding: 16px; /* Increased from 10px */
+    gap: 15px;
+    padding: 10px; /* Reduced padding */
     border-radius: 10px;
-    margin: 5px 0; /* Added vertical margins */
+    margin: 0;
 }
 
 .theme-selector label {
@@ -99,10 +99,10 @@
 /* Button Styles */
 .button-group {
     display: flex;
-    gap: 18px; /* Increased from 15px */
+    gap: 15px;
     justify-content: center;
-    margin-top: 18px; /* Increased from 10px */
-    padding: 5px 0;
+    margin-top: 10px; /* Reduced from 18px */
+    padding: 0;
 }
 
 .btn {

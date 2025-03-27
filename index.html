@@ -10,7 +10,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crossword Solver</title>
-    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css?v=20250327.1">
     
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#2563eb">
@@ -45,6 +45,9 @@
                 <select id="theme-picker" aria-label="Select visual theme">
                     <option value="newspaper">Newspaper</option>
                     <option value="modern">Modern</option>
+                    <option value="google">Google</option>
+                    <option value="apple">Apple</option>
+                    <option value="microsoft">Microsoft</option>
                     <option value="silly">Silly</option>
                 </select>
             </div>
@@ -61,8 +64,6 @@
             <div class="button-group">
                 <button id="reset-btn" class="btn btn-reset" aria-label="Clear all letter boxes">Clear All</button>
             </div>
-            
-            <div class="info-text">Enter letters for known positions, leave blanks for unknown letters.</div>
         </div>
         
         <div id="word-input" class="word-input" aria-label="Word input area"></div>
@@ -70,20 +71,40 @@
     </div>
     
     <!-- Scripts -->
-    <script src="dictionary.js"></script>
-    <script src="app.js"></script>
-    <script src="js/accessibility.js"></script>
+    <script src="dictionary.js?v=20250327.1"></script>
+    <script src="app.js?v=20250327.1"></script>
+    <script src="js/accessibility.js?v=20250327.1"></script>
     <script>
-        // Register service worker for PWA support
+        // Temporary code to unregister any existing service workers
         if ('serviceWorker' in navigator) {
-            window.addEventListener('load', function() {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(function(registration) {
-                        console.log('ServiceWorker registration successful with scope: ', registration.scope);
-                    })
-                    .catch(function(error) {
-                        console.log('ServiceWorker registration failed: ', error);
+            navigator.serviceWorker.getRegistrations().then(function(registrations) {
+                for(let registration of registrations) {
+                    registration.unregister();
+                    console.log('Service worker unregistered to apply new caching strategy');
+                }
+            });
+            
+            // Clear all caches
+            if (window.caches) {
+                caches.keys().then(function(cacheNames) {
+                    cacheNames.forEach(function(cacheName) {
+                        caches.delete(cacheName);
+                        console.log('Cache deleted:', cacheName);
                     });
+                });
+            }
+            
+            // After clearing all service workers and caches, register the new one
+            window.addEventListener('load', function() {
+                setTimeout(function() {
+                    navigator.serviceWorker.register('/service-worker.js?v=20250327.2')
+                        .then(function(registration) {
+                            console.log('New ServiceWorker registration successful with scope: ', registration.scope);
+                        })
+                        .catch(function(error) {
+                            console.log('ServiceWorker registration failed: ', error);
+                        });
+                }, 1000); // Short delay to ensure unregistration completes
             });
         }
     </script>

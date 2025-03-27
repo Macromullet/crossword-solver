@@ -30,7 +30,14 @@ document.addEventListener('DOMContentLoaded', function() {
     // Theme switching functionality
     themePicker.addEventListener('change', function() {
         // Remove all theme classes
-        mainContainer.classList.remove('newspaper-theme', 'modern-theme', 'silly-theme');
+        mainContainer.classList.remove(
+            'newspaper-theme', 
+            'modern-theme', 
+            'silly-theme', 
+            'google-theme', 
+            'apple-theme', 
+            'microsoft-theme'
+        );
         
         // Add the selected theme class
         mainContainer.classList.add(`${this.value}-theme`);
