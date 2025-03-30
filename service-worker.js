@@ -4,36 +4,40 @@
  * This file is part of the Crossword Solver application.
  * Licensed under the MIT License. See LICENSE.md for details.
  */
-const CACHE_NAME = 'crossword-solver-v4';
+const CACHE_NAME = 'crossword-solver-v5';
 
-// Files to cache only for offline support
+// Determine if we're on GitHub Pages or local development
+const isGitHubPages = self.location.pathname.includes('/crossword-solver/');
+const BASE_PATH = isGitHubPages ? '/crossword-solver/' : '/';
+
+// Files to cache only for offline support - using relative paths
 const filesToCache = [
-    '/dictionary.txt', // Only cache the dictionary data and other static assets
-    '/manifest.json',
-    '/icons/icon.svg',
-    '/icons/icon-192x192.png'
+    './dictionary.txt',
+    './manifest.json',
+    './icons/icon.svg',
+    './icons/icon-192x192.png'
 ];
 
 // Critical assets that should be cached but checked for updates frequently
 const dynamicAssets = [
-    '/',
-    '/index.html',
-    '/app.js',
-    '/dictionary.js',
-    '/css/main.css',
-    '/css/base/base.css',
-    '/css/components/loading.css',
-    '/css/components/controls.css',
-    '/css/components/word-input.css',
-    '/css/components/results.css',
-    '/css/components/accessibility.css',
-    '/css/themes/newspaper-theme.css',
-    '/css/themes/modern-theme.css',
-    '/css/themes/silly-theme.css',
-    '/css/themes/google-theme.css',
-    '/css/themes/apple-theme.css',
-    '/css/themes/microsoft-theme.css',
-    '/js/accessibility.js'
+    './',
+    './index.html',
+    './app.js',
+    './dictionary.js',
+    './css/main.css',
+    './css/base/base.css',
+    './css/components/loading.css',
+    './css/components/controls.css',
+    './css/components/word-input.css',
+    './css/components/results.css',
+    './css/components/accessibility.css',
+    './css/themes/newspaper-theme.css',
+    './css/themes/modern-theme.css',
+    './css/themes/silly-theme.css',
+    './css/themes/google-theme.css',
+    './css/themes/apple-theme.css',
+    './css/themes/microsoft-theme.css',
+    './js/accessibility.js'
 ];
 
 // Install service worker and cache static content
@@ -46,13 +50,24 @@ self.addEventListener('install', function(event) {
                 return cache.addAll(filesToCache);
             })
     );
+    // Activate immediately
+    self.skipWaiting();
 });
 
 // Use a network-first strategy for dynamic content
 self.addEventListener('fetch', function(event) {
+    // Skip cross-origin requests
+    if (!event.request.url.startsWith(self.location.origin)) {
+        return;
+    }
+    
     const url = new URL(event.request.url);
+    const relativePath = url.pathname.replace(new RegExp('^' + BASE_PATH), './');
+    
     const isDynamicAsset = dynamicAssets.some(asset => 
-        url.pathname.endsWith(asset) || url.pathname === asset
+        relativePath === asset || 
+        relativePath.endsWith(asset.substring(1)) || // Handle both ./path and path
+        relativePath === asset.substring(2) // Handle path without ./
     );
     
     // For HTML, CSS, JS files - use network first strategy
@@ -127,6 +142,9 @@ self.addEventListener('activate', function(event) {
                     }
                 })
             );
+        }).then(() => {
+            // Take control of all clients immediately
+            return self.clients.claim();
         })
     );
 });
