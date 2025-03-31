@@ -148,10 +148,14 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add the crossword container to the word input container
         wordInputContainer.appendChild(crosswordContainer);
         
-        // Focus on the first box
-        if (letterBoxes.length > 0) {
-            letterBoxes[0].focus();
-        }
+        // Focus on first letter box after a slight delay to ensure UI is ready
+        // This will trigger the mobile keyboard to appear
+        setTimeout(function() {
+            const letterBoxes = document.querySelectorAll('.letter-box');
+            if (letterBoxes && letterBoxes.length > 0) {
+                letterBoxes[0].focus();
+            }
+        }, 1000);
     }
     
     function updateResults() {

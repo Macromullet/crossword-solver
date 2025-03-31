@@ -9,8 +9,8 @@
 .word-input {
     display: flex;
     justify-content: center;
-    margin: 10px auto 15px; /* Further reduced margins */
-    padding: 10px; /* Reduced from 15px */
+    margin: 5px auto 5px; /* Further reduced margins */
+    padding: 5px; /* Reduced from 10px */
     position: relative;
 }
 
@@ -52,8 +52,8 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .word-input {
-        padding: 15px 8px; /* Increased from 10px 5px */
-        margin: 25px auto 35px; /* More balanced spacing */
+        padding: 8px 5px; /* Reduced from 15px 8px */
+        margin: 10px auto 5px; /* Reduced from 25px auto 35px for more compact display */
     }
     
     .letter-box {

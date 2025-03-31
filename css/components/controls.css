@@ -138,7 +138,36 @@
     margin: 12px 0; /* Added margins */
 }
 
-/* Mobile Responsive */
+/* Input Section with Clear Button */
+.input-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    width: 100%;
+}
+
+.input-section .btn-reset {
+    margin-top: 1px; /* Minimal spacing as requested */
+    padding: 8px 16px;
+    font-size: 15px;
+    border-radius: 4px; /* Less rounded for a more compact look */
+}
+
+/* Mobile optimizations */
+@media (max-width: 768px) {
+    .input-section {
+        gap: 5px; /* Even tighter on mobile */
+    }
+    
+    .input-section .btn-reset {
+        margin-top: 0;
+        padding: 6px 14px;
+        font-size: 14px;
+    }
+}
+
 @media (max-width: 768px) {
     .controls {
         gap: 24px; /* Adjusted for mobile but still maintained spacing */
