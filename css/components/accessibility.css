@@ -251,3 +251,99 @@
         scroll-behavior: auto !important;
     }
 }
+
+/* Voice Input Mode */
+.voice-input-button {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    transition: all 0.3s ease;
+}
+
+.voice-input-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    background-color: #1d4ed8;
+}
+
+.voice-input-button.listening {
+    animation: pulse-red 1.5s infinite;
+    background-color: #dc2626;
+}
+
+.voice-status {
+    position: fixed;
+    bottom: 135px;
+    right: 20px;
+    background-color: rgba(0, 0, 0, 0.85);
+    color: white;
+    padding: 15px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    max-width: 320px;
+    z-index: 999;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+.voice-status h3 {
+    margin: 0 0 10px 0;
+    font-size: 16px;
+    font-weight: 600;
+}
+
+.voice-status ul {
+    margin: 0 0 10px 0;
+    padding-left: 18px;
+    line-height: 1.4;
+}
+
+.voice-status li {
+    margin-bottom: 4px;
+}
+
+.voice-status p {
+    margin: 10px 0 0 0;
+    font-style: italic;
+}
+
+@keyframes pulse-red {
+    0% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(220, 38, 38, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(220, 38, 38, 0);
+    }
+}
+
+/* High contrast adjustments for voice input */
+.high-contrast-mode .voice-input-button {
+    background-color: var(--high-contrast-button);
+    color: var(--high-contrast-button-text);
+    border: 2px solid var(--high-contrast-border);
+}
+
+.high-contrast-mode .voice-input-button.listening {
+    background-color: var(--high-contrast-button-text);
+    color: var(--high-contrast-button);
+}
+
+.high-contrast-mode .voice-status {
+    background-color: var(--high-contrast-bg);
+    color: var(--high-contrast-text);
+    border: 2px solid var(--high-contrast-border);
+}
