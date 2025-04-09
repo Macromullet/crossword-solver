@@ -159,28 +159,56 @@ document.addEventListener('DOMContentLoaded', function() {
                 // For iOS devices specifically (iPhone/iPad)
                 if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
                     // iOS often requires a user interaction to show the keyboard
-                    // Add a visual indicator that this element needs interaction
+                    // Make the first letter box more visually prominent
                     letterBoxes[0].classList.add('ready-for-input');
                     
-                    // Remove any existing start typing buttons first
+                    // Remove any existing start typing buttons (if they exist from previous code)
                     const existingButtons = document.querySelectorAll('.start-typing-btn');
                     existingButtons.forEach(btn => btn.remove());
                     
-                    // Create a "Start Typing" button specifically for iOS devices
-                    const startTypingBtn = document.createElement('button');
-                    startTypingBtn.className = 'start-typing-btn';
-                    startTypingBtn.textContent = 'Tap to Start Typing';
-                    startTypingBtn.setAttribute('aria-label', 'Activate keyboard to start typing');
+                    // Look for an existing hint container
+                    let hintContainer = document.querySelector('.hint-container');
+                    if (!hintContainer) {
+                        // Create a container for hints that will always occupy the same space
+                        hintContainer = document.createElement('div');
+                        hintContainer.className = 'hint-container';
+                        
+                        // Insert the fixed container before the word input container
+                        const inputSection = document.querySelector('.input-section');
+                        if (inputSection && inputSection.firstChild) {
+                            inputSection.insertBefore(hintContainer, inputSection.firstChild);
+                        }
+                    }
                     
-                    // When clicked, focus the first letter box and remove itself
-                    startTypingBtn.addEventListener('click', function() {
-                        letterBoxes[0].focus();
-                        this.remove();
+                    // Create or update the hint text inside the container
+                    hintContainer.innerHTML = ''; // Clear any existing content
+                    const hintText = document.createElement('div');
+                    hintText.className = 'typing-hint';
+                    hintText.textContent = 'Tap any letter to start';
+                    hintText.setAttribute('aria-hidden', 'true');
+                    
+                    // Add the hint text to the fixed container
+                    hintContainer.appendChild(hintText);
+                    
+                    // Auto-hide the hint text (but keep the container) after 5 seconds
+                    setTimeout(() => {
+                        hintText.classList.add('fade-out');
+                        setTimeout(() => {
+                            if (hintText.parentNode === hintContainer) {
+                                hintText.remove();
+                            }
+                        }, 1000);
+                    }, 5000);
+                    
+                    // Make every letter box directly interactive
+                    letterBoxes.forEach(box => {
+                        box.addEventListener('click', function() {
+                            this.focus();
+                            // Remove the hint when any box is clicked
+                            const hint = document.querySelector('.typing-hint');
+                            if (hint) hint.remove();
+                        });
                     });
-                    
-                    // Insert button before the word input container
-                    const wordInputContainer = document.getElementById('word-input');
-                    wordInputContainer.parentNode.insertBefore(startTypingBtn, wordInputContainer);
                 }
             }
         }, 300); // Reduced delay for better responsiveness
@@ -207,25 +235,29 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         }
         
-        // Skip search and hide results if no letters entered
+        // When a user starts typing, we activate compact mode
+        if (hasLetters) {
+            // Once the user starts typing, we add the has-results class to enable compact layout
+            document.body.classList.add('has-results');
+        }
+        
+        // If no letters entered, keep the layout but empty the results
         if (!hasLetters) {
             resultsContainer.classList.remove('has-results');
-            document.body.classList.remove('has-results');
             return;
         }
         
         // Find matching words using our fast solver
         const matches = solver.query(pattern, '.');
         
-        // Show results container
-        resultsContainer.classList.add('has-results');
-        
-        // Add class to body for mobile optimization when we have matches
+        // Show or hide results container based on whether we have matches
         if (matches.length > 0) {
-            document.body.classList.add('has-results');
+            resultsContainer.classList.add('has-results');
         } else {
-            document.body.classList.remove('has-results');
+            resultsContainer.classList.remove('has-results');
         }
+        
+        // Important: We no longer remove the body has-results class once it's been added
         
         // Display results
         if (matches.length === 0) {

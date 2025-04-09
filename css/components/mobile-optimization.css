@@ -20,6 +20,33 @@
         opacity: 0.9;
     }
     
+    /* Typing hint styling with fixed container */
+    .hint-container {
+        height: 22px; /* Fixed height to prevent layout shifts */
+        margin: 0 auto;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+    
+    .typing-hint {
+        font-size: 14px;
+        color: #2563eb;
+        text-align: center;
+        font-style: italic;
+        animation: hint-pulse 2s infinite;
+        transition: opacity 0.5s ease-out;
+    }
+    
+    .typing-hint.fade-out {
+        opacity: 0;
+    }
+    
+    @keyframes hint-pulse {
+        0%, 100% { opacity: 0.7; }
+        50% { opacity: 1; }
+    }
+    
     /* Create collapsible header functionality */
     body.has-results .app-title {
         font-size: 16px;
