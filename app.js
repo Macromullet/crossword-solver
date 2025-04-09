@@ -24,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function() {
     wordSizeSlider.addEventListener('input', function() {
         currentWordSize = parseInt(this.value);
         sizeDisplay.textContent = currentWordSize;
+        // Set CSS variable for responsive sizing
+        document.documentElement.style.setProperty('--current-word-size', currentWordSize);
         generateLetterBoxes(currentWordSize);
     });
     

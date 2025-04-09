@@ -32,10 +32,10 @@
 }
 
 .letter-box {
-    width: 54px; /* Slightly larger for better visual presence */
-    height: 54px; /* Kept square */
+    width: min(54px, calc(90vw / var(--current-word-size, 4))); /* Dynamic sizing based on viewport and word size */
+    height: min(54px, calc(90vw / var(--current-word-size, 4))); /* Maintain square shape */
     text-align: center;
-    font-size: 28px;
+    font-size: clamp(16px, 5vw, 28px); /* Fluid font size */
     font-weight: bold;
     text-transform: uppercase;
     transition: all 0.2s ease;
@@ -52,29 +52,26 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .word-input {
-        padding: 8px 5px; /* Reduced from 15px 8px */
-        margin: 10px auto 5px; /* Reduced from 25px auto 35px for more compact display */
+        padding: 8px 5px;
+        margin: 10px auto 5px;
     }
     
-    .letter-box {
-        width: 42px; /* Adjusted from 40px */
-        height: 42px;
-        font-size: 22px;
+    .crossword-container {
+        max-width: 95vw;
+        overflow-x: auto; /* Allow scrolling for very long words */
+        justify-content: center;
     }
 }
 
 @media (max-width: 480px) {
     .letter-box {
-        width: 32px;
-        height: 32px;
-        font-size: 18px;
+        font-size: clamp(14px, 4vw, 20px);
     }
 }
 
-@media (max-width: 360px) {
-    .letter-box {
-        width: 28px;
-        height: 28px;
-        font-size: 16px;
+@media (max-height: 600px) {
+    .word-input {
+        margin: 5px auto 5px;
+        padding: 0;
     }
 }

@@ -95,35 +95,58 @@
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .results {
-        margin: 10px auto 0; /* Reduced from 25px auto */
-        padding: 8px;
-        row-gap: 3px;
-        column-gap: 5px;
-        min-height: 100px; /* Even smaller for mobile */
-        max-height: 180px; /* Limit maximum height on mobile */
+        margin: 8px auto 0;
+        padding: 6px;
+        row-gap: 4px;
+        column-gap: 4px;
+        min-height: 100px;
+        max-height: min(180px, 30vh); /* Adaptive height based on viewport */
     }
     
     .result-word {
-        font-size: 15px;
-        margin: 0;
-        padding: 6px 10px;
-        height: 30px; /* Slightly smaller fixed height for mobile */
+        font-size: 14px;
+        padding: 4px 8px;
+        height: 28px;
+    }
+    
+    .result-header {
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+    
+    .more-results {
+        margin-top: 8px;
+        font-size: 13px;
     }
 }
 
 /* Specific adjustments for mobile devices with keyboard open */
 @media (max-height: 600px) {
     .results {
-        min-height: 80px;
-        max-height: 120px;
+        min-height: 60px;
+        max-height: min(100px, 30vh);
     }
     
     h1 {
-        margin-bottom: 10px; /* Further reduce header margin when keyboard is likely open */
+        margin-bottom: 6px;
+        font-size: 18px;
     }
     
     .controls {
-        gap: 8px;
-        margin-bottom: 8px;
+        gap: 6px;
+        margin-bottom: 6px;
+    }
+    
+    .result-header {
+        margin-bottom: 6px;
+    }
+}
+
+/* iPhone SE and other very small devices */
+@media (max-width: 380px) {
+    .result-word {
+        font-size: 13px;
+        padding: 2px 6px;
+        height: 24px;
     }
 }
