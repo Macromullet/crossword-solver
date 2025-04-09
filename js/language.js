@@ -434,15 +434,36 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // Setup mobile keyboard
     if ('ontouchstart' in window || navigator.maxTouchPoints > 0) {
-        // Add virtual keyboard for mobile devices
+        // Add keyboard toggle button handler
+        const keyboardToggle = document.getElementById('keyboard-toggle');
+        if (keyboardToggle) {
+            keyboardToggle.addEventListener('click', function() {
+                const virtualKeyboard = document.getElementById('virtual-keyboard');
+                if (virtualKeyboard && virtualKeyboard.classList.contains('active')) {
+                    LanguageManager.hideVirtualKeyboard();
+                } else {
+                    LanguageManager.showVirtualKeyboard();
+                }
+            });
+            
+            // Show the keyboard button only on touch devices
+            keyboardToggle.style.display = 'block';
+        }
+        
+        // Close keyboard when clicking outside of keyboard and input
         document.addEventListener('click', (e) => {
-            if (e.target.classList.contains('letter-box')) {
-                LanguageManager.showVirtualKeyboard();
-            } else if (!e.target.closest('#virtual-keyboard') && 
-                      !e.target.classList.contains('letter-box')) {
+            if (!e.target.classList.contains('letter-box') && 
+                !e.target.closest('#virtual-keyboard') &&
+                e.target.id !== 'keyboard-toggle') {
                 LanguageManager.hideVirtualKeyboard();
             }
         });
+    } else {
+        // Hide keyboard toggle on non-touch devices
+        const keyboardToggle = document.getElementById('keyboard-toggle');
+        if (keyboardToggle) {
+            keyboardToggle.style.display = 'none';
+        }
     }
 });
 
