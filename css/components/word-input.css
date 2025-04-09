@@ -61,6 +61,17 @@
         overflow-x: auto; /* Allow scrolling for very long words */
         justify-content: center;
     }
+
+    .letter-box {
+        -webkit-tap-highlight-color: rgba(37, 99, 235, 0.3); /* visual feedback on tap for iOS */
+    }
+    
+    .start-typing-btn {
+        width: 80%;
+        max-width: 300px;
+        padding: 12px 16px;
+        margin-bottom: 15px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -73,5 +84,54 @@
     .word-input {
         margin: 5px auto 5px;
         padding: 0;
+    }
+}
+
+/* Mobile input guidance */
+.ready-for-input {
+    animation: pulse 1.5s infinite;
+    box-shadow: 0 0 0 2px rgba(37, 99, 235, 0.5);
+}
+
+.start-typing-btn {
+    display: block;
+    margin: 0 auto 10px;
+    padding: 8px 16px;
+    background-color: #2563eb;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: all 0.3s ease;
+    animation: bounce 1s infinite alternate;
+}
+
+.start-typing-btn:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-2px);
+}
+
+/* Animations */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6);
+    }
+    50% {
+        box-shadow: 0 0 0 5px rgba(37, 99, 235, 0.3);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(37, 99, 235, 0.6);
+    }
+}
+
+@keyframes bounce {
+    from {
+        transform: translateY(0);
+    }
+    to {
+        transform: translateY(-4px);
     }
 }

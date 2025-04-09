@@ -1,0 +1,70 @@
+/*
+ * Copyright (c) 2025 Brooke Philpott
+ * 
+ * This file is part of the Crossword Solver application.
+ * Licensed under the MIT License. See LICENSE.md for details.
+ */
+
+/* Mobile space optimization styles */
+
+/* Mobile hide elements to save space */
+@media (max-width: 768px) {
+    .mobile-hide {
+        display: none;
+    }
+
+    /* Optimize input instructions */
+    .input-instructions {
+        font-size: 14px;
+        margin-bottom: 0;
+        opacity: 0.9;
+    }
+    
+    /* Create collapsible header functionality */
+    body.has-results .app-title {
+        font-size: 16px;
+        position: absolute;
+        top: 5px;
+        left: 10px;
+        margin: 0;
+        z-index: 2;
+        line-height: 1;
+        border-bottom: none !important; /* Remove the horizontal line */
+        padding-bottom: 0 !important;
+    }
+    
+    body.has-results .controls {
+        transform: scale(0.85);
+        transform-origin: top center;
+        margin-top: 30px; /* Increased space for absolute positioned title */
+        margin-bottom: 2px;
+        position: relative;
+        clear: both;
+    }
+    
+    /* Maximize results area when showing words */
+    body.has-results .results {
+        min-height: 200px;
+        max-height: 60vh;
+    }
+}
+
+/* Even more aggressive space saving for smaller screens */
+@media (max-width: 480px) {
+    body.has-results .controls {
+        margin-top: 20px;
+        transform: scale(0.8);
+    }
+    
+    /* Make reset button even smaller */
+    body.has-results .btn-reset {
+        padding: 4px 8px;
+        font-size: 13px;
+    }
+    
+    /* Further optimize letter boxes on very small screens */
+    body.has-results .crossword-container {
+        transform: scale(0.95);
+        transform-origin: top center;
+    }
+}

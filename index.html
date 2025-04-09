@@ -37,7 +37,7 @@
     </div>
     
     <div id="main-container" class="container hidden newspaper-theme" role="main">
-        <h1>Crossword Solver</h1>
+        <h1 class="app-title">Crossword Solver</h1>
         
         <div class="controls">
             <div class="theme-selector">
@@ -63,8 +63,9 @@
         </div>
         
         <div class="input-section">
+            <div class="input-instructions"><span class="mobile-hide">Enter your </span>crossword clue <span class="mobile-hide">below</span></div>
             <div id="word-input" class="word-input" aria-label="Word input area"></div>
-            <button id="reset-btn" class="btn btn-reset" aria-label="Clear all letter boxes">Clear All</button>
+            <button id="reset-btn" class="btn btn-reset" aria-label="Clear all letter boxes">Clear</button>
         </div>
         
         <div id="results" class="results" role="region" aria-label="Matching words results" aria-live="polite"></div>

@@ -170,17 +170,65 @@
 
 @media (max-width: 768px) {
     .controls {
-        gap: 24px; /* Adjusted for mobile but still maintained spacing */
+        gap: 12px;
+        flex-direction: row;
+        justify-content: space-between;
+        margin-bottom: 8px;
+        flex-wrap: wrap;
+    }
+    
+    .theme-selector {
+        padding: 2px 5px;
+        gap: 5px;
+        order: 2;
     }
     
     .theme-selector select {
         min-width: 100px;
-        padding: 8px 12px;
+        padding: 5px 8px;
+        font-size: 14px;
+    }
+    
+    .theme-selector label {
+        font-size: 14px;
+    }
+    
+    .word-size-control {
+        flex-direction: row;
+        align-items: center;
+        max-width: none;
+        gap: 4px;
+        flex: 1;
+        order: 1;
+    }
+    
+    .word-size-control label {
+        font-size: 14px;
+        margin-bottom: 0;
+        white-space: nowrap;
+    }
+    
+    .slider-container {
+        padding: 0;
+        margin: 0;
     }
 }
 
 @media (max-width: 480px) {
     .controls {
-        gap: 12px;
+        gap: 5px;
+    }
+    
+    /* Create toggle for theme selector to save even more space */
+    .theme-selector.collapsed {
+        width: auto;
+    }
+    
+    .theme-selector.collapsed select {
+        display: none;
+    }
+    
+    .theme-selector label {
+        cursor: pointer;
     }
 }

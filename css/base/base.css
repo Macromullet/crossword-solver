@@ -55,23 +55,43 @@ section {
 /* Mobile Responsive Styles */
 @media (max-width: 768px) {
     .container {
-        padding: 12px 10px; /* Further reduced padding on mobile */
+        padding: 8px 8px; /* Minimized padding */
     }
     
-    h1 {
-        font-size: 24px; /* Reduced from 28px */
-        margin-bottom: 12px;
+    h1.app-title {
+        font-size: 22px; 
+        margin-bottom: 8px;
+        transition: all 0.3s ease;
+    }
+
+    /* Create ultra-compact mode when there are results */
+    .results.has-results + .input-section,
+    .results.has-results ~ h1.app-title {
+        transform: scale(0.9);
+        margin-bottom: 4px;
+    }
+    
+    /* Option to collapse the header when scrolling down */
+    body.scrolled h1.app-title {
+        font-size: 18px;
+        margin-bottom: 4px;
     }
 }
 
 /* Extra adjustments for very small screens or when keyboard is open */
 @media (max-height: 600px) {
     .container {
-        padding: 8px 10px;
+        padding: 5px 6px;
     }
     
-    h1 {
-        font-size: 20px;
-        margin-bottom: 8px;
+    h1.app-title {
+        font-size: 16px;
+        margin-bottom: 4px;
+        /* Option to make the title a side element */
+        position: absolute;
+        top: 8px;
+        left: 8px;
+        text-align: left;
+        transform-origin: left top;
     }
 }

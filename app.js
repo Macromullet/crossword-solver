@@ -150,14 +150,40 @@ document.addEventListener('DOMContentLoaded', function() {
         // Add the crossword container to the word input container
         wordInputContainer.appendChild(crosswordContainer);
         
-        // Focus on first letter box after a slight delay to ensure UI is ready
-        // This will trigger the mobile keyboard to appear
+        // Better focus handling for mobile devices
         setTimeout(function() {
             const letterBoxes = document.querySelectorAll('.letter-box');
             if (letterBoxes && letterBoxes.length > 0) {
                 letterBoxes[0].focus();
+                
+                // For iOS devices specifically (iPhone/iPad)
+                if (/iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream) {
+                    // iOS often requires a user interaction to show the keyboard
+                    // Add a visual indicator that this element needs interaction
+                    letterBoxes[0].classList.add('ready-for-input');
+                    
+                    // Remove any existing start typing buttons first
+                    const existingButtons = document.querySelectorAll('.start-typing-btn');
+                    existingButtons.forEach(btn => btn.remove());
+                    
+                    // Create a "Start Typing" button specifically for iOS devices
+                    const startTypingBtn = document.createElement('button');
+                    startTypingBtn.className = 'start-typing-btn';
+                    startTypingBtn.textContent = 'Tap to Start Typing';
+                    startTypingBtn.setAttribute('aria-label', 'Activate keyboard to start typing');
+                    
+                    // When clicked, focus the first letter box and remove itself
+                    startTypingBtn.addEventListener('click', function() {
+                        letterBoxes[0].focus();
+                        this.remove();
+                    });
+                    
+                    // Insert button before the word input container
+                    const wordInputContainer = document.getElementById('word-input');
+                    wordInputContainer.parentNode.insertBefore(startTypingBtn, wordInputContainer);
+                }
             }
-        }, 1000);
+        }, 300); // Reduced delay for better responsiveness
     }
     
     function updateResults() {
@@ -184,6 +210,7 @@ document.addEventListener('DOMContentLoaded', function() {
         // Skip search and hide results if no letters entered
         if (!hasLetters) {
             resultsContainer.classList.remove('has-results');
+            document.body.classList.remove('has-results');
             return;
         }
         
@@ -192,6 +219,13 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Show results container
         resultsContainer.classList.add('has-results');
+        
+        // Add class to body for mobile optimization when we have matches
+        if (matches.length > 0) {
+            document.body.classList.add('has-results');
+        } else {
+            document.body.classList.remove('has-results');
+        }
         
         // Display results
         if (matches.length === 0) {
