@@ -40,16 +40,27 @@
         <h1 class="app-title">Crossword Solver</h1>
         
         <div class="controls">
-            <div class="theme-selector">
-                <label for="theme-picker">Theme:</label>
-                <select id="theme-picker" aria-label="Select visual theme">
-                    <option value="newspaper">Newspaper</option>
-                    <option value="modern">Modern</option>
-                    <option value="google">Google</option>
-                    <option value="apple">Apple</option>
-                    <option value="microsoft">Microsoft</option>
-                    <option value="silly">Silly</option>
-                </select>
+            <div class="language-theme-controls">
+                <div class="language-selector">
+                    <label for="language-picker" class="sr-only">Language:</label>
+                    <div class="language-buttons" role="group" aria-label="Select language">
+                        <button id="lang-en" class="lang-btn active" aria-pressed="true" title="English">EN</button>
+                        <button id="lang-es" class="lang-btn" aria-pressed="false" title="Español">ES</button>
+                        <button id="lang-fr" class="lang-btn" aria-pressed="false" title="Français">FR</button>
+                    </div>
+                </div>
+                
+                <div class="theme-selector">
+                    <label for="theme-picker">Theme:</label>
+                    <select id="theme-picker" aria-label="Select visual theme">
+                        <option value="newspaper">Newspaper</option>
+                        <option value="modern">Modern</option>
+                        <option value="google">Google</option>
+                        <option value="apple">Apple</option>
+                        <option value="microsoft">Microsoft</option>
+                        <option value="silly">Silly</option>
+                    </select>
+                </div>
             </div>
             
             <div class="word-size-control">
@@ -75,6 +86,7 @@
     <script src="dictionary.js?v=20250327.1"></script>
     <script src="app.js?v=20250327.1"></script>
     <script src="js/accessibility.js?v=20250327.1"></script>
+    <script src="js/language.js?v=20250327.1"></script>
     <script>
         // Register service worker for PWA support
         if ('serviceWorker' in navigator) {

@@ -16,6 +16,60 @@
     padding: 5px 0;
 }
 
+/* Language and Theme Controls wrapper */
+.language-theme-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    max-width: 320px;
+    gap: 10px;
+}
+
+/* Language Selector */
+.language-selector {
+    display: flex;
+    align-items: center;
+}
+
+.language-buttons {
+    display: flex;
+    border-radius: 6px;
+    overflow: hidden;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.lang-btn {
+    padding: 8px 12px;
+    background-color: white;
+    border: none;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.lang-btn:not(:last-child) {
+    border-right: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.lang-btn.active {
+    background-color: #2563eb;
+    color: white;
+}
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
 /* Word Size Slider */
 .word-size-control {
     display: flex;
@@ -177,10 +231,18 @@
         flex-wrap: wrap;
     }
     
+    .language-theme-controls {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: auto;
+        max-width: none;
+        order: 2;
+    }
+    
     .theme-selector {
         padding: 2px 5px;
         gap: 5px;
-        order: 2;
     }
     
     .theme-selector select {
@@ -191,6 +253,15 @@
     
     .theme-selector label {
         font-size: 14px;
+    }
+    
+    .language-selector {
+        margin-right: 8px;
+    }
+    
+    .lang-btn {
+        padding: 5px 8px;
+        font-size: 12px;
     }
     
     .word-size-control {

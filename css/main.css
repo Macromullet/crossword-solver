@@ -15,6 +15,7 @@
 @import 'components/results.css';
 @import 'components/accessibility.css';
 @import 'components/mobile-optimization.css';
+@import 'components/mobile-keyboard.css';
 
 /* Import Theme Styles */
 @import 'themes/newspaper-theme.css';
