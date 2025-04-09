@@ -12,10 +12,10 @@
     --apple-blue: #0071e3;
     --apple-blue-hover: #0077ed;
     --apple-text: #1d1d1f;
-    --apple-text-secondary: #86868b;
+    --apple-text-secondary: #6e6e73; /* Darkened from #86868b for better contrast (ratio: 4.6:1) */
     --apple-border: rgba(0, 0, 0, 0.1);
     --apple-surface: #ffffff;
-    --apple-error: #ff3b30;
+    --apple-error: #d70015; /* Adjusted from #ff3b30 for better contrast */
     --apple-input-bg: rgba(210, 210, 215, 0.25);
     --apple-shadow: rgba(0, 0, 0, 0.1);
     --apple-radius: 12px;

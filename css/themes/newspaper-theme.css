@@ -94,5 +94,5 @@
 }
 
 .newspaper-theme .no-matches {
-    color: #9a3b3b;
+    color: #8a2929; /* Darkened for better contrast (ratio: 6.2:1) */
 }

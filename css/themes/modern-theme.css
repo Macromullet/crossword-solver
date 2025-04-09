@@ -55,7 +55,7 @@
 }
 
 .modern-theme .word-size-control label {
-    color: #1e40af;
+    color: #0d2473; /* Darkened for better contrast (at least 4.5:1) */
 }
 
 /* Word Input */

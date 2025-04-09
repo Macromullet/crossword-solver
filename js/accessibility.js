@@ -15,6 +15,7 @@ const AccessibilityManager = {
     highContrastMode: false,
     largeFontMode: false,
     screenReaderMode: false,
+    textSpacingMode: false,
     
     // DOM Elements cache
     elements: {
@@ -22,6 +23,7 @@ const AccessibilityManager = {
         accessibilityPanel: null,
         highContrastToggle: null,
         largeFontToggle: null,
+        textSpacingToggle: null,
         screenReaderToggle: null,
         letterBoxes: []
     },
@@ -81,16 +83,28 @@ const AccessibilityManager = {
                     <label for="large-font">Large Font Mode</label>
                 </div>
                 <div class="accessibility-option">
+                    <input type="checkbox" id="text-spacing" class="accessibility-checkbox">
+                    <label for="text-spacing">Increased Text Spacing</label>
+                </div>
+                <div class="accessibility-option">
                     <input type="checkbox" id="screen-reader" class="accessibility-checkbox">
                     <label for="screen-reader">Screen Reader Support</label>
                 </div>
             </div>
         `;
         
+        // Create screen reader mode indicator
+        const srIndicator = document.createElement('div');
+        srIndicator.className = 'screen-reader-mode-indicator';
+        srIndicator.textContent = 'Screen Reader Mode Active';
+        srIndicator.setAttribute('aria-hidden', 'true'); // Hide from screen readers as they already know
+        document.body.appendChild(srIndicator);
+        
         document.body.appendChild(panel);
         this.elements.accessibilityPanel = panel;
         this.elements.highContrastToggle = document.getElementById('high-contrast');
         this.elements.largeFontToggle = document.getElementById('large-font');
+        this.elements.textSpacingToggle = document.getElementById('text-spacing');
         this.elements.screenReaderToggle = document.getElementById('screen-reader');
     },
     
@@ -101,6 +115,11 @@ const AccessibilityManager = {
         // Accessibility toggle
         this.elements.accessibilityToggle.addEventListener('click', () => {
             this.togglePanel();
+            
+            // Always ensure accessibility is activated when panel is shown
+            if (this.elements.accessibilityPanel.getAttribute('aria-hidden') === 'false') {
+                this.toggleAccessibility(true);
+            }
         });
         
         // Close button
@@ -119,6 +138,11 @@ const AccessibilityManager = {
         
         this.elements.largeFontToggle.addEventListener('change', (e) => {
             this.largeFontMode = e.target.checked;
+            this.applySettings();
+        });
+        
+        this.elements.textSpacingToggle.addEventListener('change', (e) => {
+            this.textSpacingMode = e.target.checked;
             this.applySettings();
         });
         
@@ -150,10 +174,22 @@ const AccessibilityManager = {
             }
         });
         
-        // Listen for Escape key to close panel
+        // Listen for keyboard shortcuts
         document.addEventListener('keydown', (e) => {
+            // Escape key to close panel
             if (e.key === 'Escape' && this.elements.accessibilityPanel.getAttribute('aria-hidden') === 'false') {
                 this.hidePanel();
+            }
+            
+            // Alt+A to toggle accessibility panel
+            if (e.key === 'a' && e.altKey) {
+                e.preventDefault();
+                this.togglePanel();
+                
+                // Ensure accessibility is activated when panel is shown
+                if (this.elements.accessibilityPanel.getAttribute('aria-hidden') === 'false') {
+                    this.toggleAccessibility(true);
+                }
             }
         });
     },
@@ -178,6 +214,11 @@ const AccessibilityManager = {
         this.elements.accessibilityPanel.setAttribute('aria-hidden', 'false');
         this.elements.accessibilityPanel.classList.add('active');
         this.elements.accessibilityToggle.setAttribute('aria-expanded', 'true');
+        
+        // Set focus to first checkbox for better keyboard navigation
+        setTimeout(() => {
+            this.elements.highContrastToggle.focus();
+        }, 50);
     },
     
     /**
@@ -187,6 +228,9 @@ const AccessibilityManager = {
         this.elements.accessibilityPanel.setAttribute('aria-hidden', 'true');
         this.elements.accessibilityPanel.classList.remove('active');
         this.elements.accessibilityToggle.setAttribute('aria-expanded', 'false');
+        
+        // Return focus to the toggle button
+        this.elements.accessibilityToggle.focus();
     },
     
     /**
@@ -201,6 +245,7 @@ const AccessibilityManager = {
             document.body.classList.remove('accessibility-enabled');
             document.body.classList.remove('high-contrast-mode');
             document.body.classList.remove('large-font-mode');
+            document.body.classList.remove('text-spacing-mode');
             document.body.classList.remove('screen-reader-mode');
         }
         
@@ -228,6 +273,13 @@ const AccessibilityManager = {
             document.body.classList.remove('large-font-mode');
         }
         
+        // Text Spacing Mode
+        if (this.textSpacingMode) {
+            document.body.classList.add('text-spacing-mode');
+        } else {
+            document.body.classList.remove('text-spacing-mode');
+        }
+        
         // Screen Reader Support
         if (this.screenReaderMode) {
             document.body.classList.add('screen-reader-mode');
@@ -245,6 +297,8 @@ const AccessibilityManager = {
         const letterBoxes = document.querySelectorAll('.letter-box');
         letterBoxes.forEach((box, index) => {
             box.setAttribute('aria-label', `Letter position ${index + 1}`);
+            // Add description of what's expected
+            box.setAttribute('aria-description', 'Enter a letter for the crossword pattern');
         });
         
         // Add more detailed descriptions to result words
@@ -252,7 +306,26 @@ const AccessibilityManager = {
         resultWords.forEach(word => {
             const text = word.textContent;
             word.setAttribute('aria-label', `Matching word: ${text}. ${text.split('').join(' ')}`);
+            word.setAttribute('aria-description', 'Click to fill this word in the letter boxes');
         });
+        
+        // Add status region for screen readers
+        let statusRegion = document.getElementById('sr-status');
+        if (!statusRegion) {
+            statusRegion = document.createElement('div');
+            statusRegion.id = 'sr-status';
+            statusRegion.setAttribute('role', 'status');
+            statusRegion.setAttribute('aria-live', 'polite');
+            statusRegion.classList.add('sr-only');
+            document.body.appendChild(statusRegion);
+        }
+        
+        // Update the results count for screen readers
+        const results = document.querySelectorAll('.result-word');
+        const count = results.length;
+        statusRegion.textContent = count === 0 ? 
+            'No matching words found.' : 
+            `Found ${count} matching words. Use tab key to navigate through them.`;
     },
     
     /**

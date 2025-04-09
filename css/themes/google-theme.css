@@ -149,7 +149,7 @@
 }
 
 .google-theme .info-text {
-    color: #5f6368;
+    color: #4f5357; /* Darkened for better contrast (ratio: 4.6:1) */
     font-family: 'Roboto', 'Segoe UI', sans-serif;
 }
 

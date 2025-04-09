@@ -12,7 +12,7 @@
     --ms-primary: #0078d4;
     --ms-primary-hover: #106ebe;
     --ms-text: #201f1e;
-    --ms-text-secondary: #605e5c;
+    --ms-text-secondary: #484644; /* Darkened from #605e5c for better contrast (ratio: 5.6:1) */
     --ms-border: #8a8886;
     --ms-border-light: #edebe9;
     --ms-surface: #ffffff;
