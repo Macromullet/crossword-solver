@@ -198,8 +198,15 @@
     flex-direction: column;
     align-items: center;
     gap: 10px;
-    margin-bottom: 10px;
+    margin: 0 auto 10px;
     width: 100%;
+    max-width: 100%;
+    text-align: center;
+}
+
+.input-instructions {
+    width: 100%;
+    text-align: center;
 }
 
 .input-section .btn-reset {
@@ -213,6 +220,7 @@
 @media (max-width: 768px) {
     .input-section {
         gap: 5px; /* Even tighter on mobile */
+        margin: 8px auto;
     }
     
     .input-section .btn-reset {
@@ -225,8 +233,8 @@
 @media (max-width: 768px) {
     .controls {
         gap: 12px;
-        flex-direction: row;
-        justify-content: space-between;
+        flex-direction: column;
+        justify-content: center;
         margin-bottom: 8px;
         flex-wrap: wrap;
     }
@@ -234,10 +242,11 @@
     .language-theme-controls {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-        width: auto;
+        justify-content: center;
+        width: 100%;
         max-width: none;
-        order: 2;
+        flex-wrap: wrap;
+        gap: 8px;
     }
     
     .theme-selector {
@@ -256,7 +265,7 @@
     }
     
     .language-selector {
-        margin-right: 8px;
+        margin-right: 0;
     }
     
     .lang-btn {
@@ -267,10 +276,10 @@
     .word-size-control {
         flex-direction: row;
         align-items: center;
+        width: 100%;
         max-width: none;
-        gap: 4px;
-        flex: 1;
-        order: 1;
+        gap: 8px;
+        justify-content: center;
     }
     
     .word-size-control label {
@@ -282,6 +291,8 @@
     .slider-container {
         padding: 0;
         margin: 0;
+        flex: 1;
+        max-width: 220px;
     }
 }
 
