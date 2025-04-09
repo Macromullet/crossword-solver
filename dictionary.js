@@ -11,7 +11,8 @@
 let dictionaries = {
     en: [], // English
     es: [], // Spanish
-    fr: []  // French
+    fr: [], // French
+    de: []  // German
 };
 
 // Currently active dictionary
@@ -194,6 +195,15 @@ function loadFallbackDictionary(lang = 'en') {
             "amour", "heureux", "triste", "grand", "haut", "bas", "blanc", "noir",
             "rouge", "bleu", "vert", "jaune", "soleil", "lune", "ciel", "terre",
             "air", "feu", "plage", "mer", "riviere", "arbre", "fleur", "plante"
+        ],
+        de: [
+            "haus", "hund", "katze", "buch", "tisch", "stuhl", "auto", "wasser",
+            "essen", "zeit", "stadt", "land", "welt", "leben", "arbeit",
+            "schule", "freund", "familie", "vater", "mutter", "sohn", "tochter",
+            "bruder", "schwester", "frau", "mann", "hand", "fuss", "kopf",
+            "liebe", "gluck", "traurig", "gross", "hoch", "niedrig", "weiss", "schwarz",
+            "rot", "blau", "grun", "gelb", "sonne", "mond", "himmel", "erde",
+            "luft", "feuer", "strand", "meer", "fluss", "baum", "blume", "pflanze"
         ]
     };
     
@@ -228,6 +238,8 @@ function detectBrowserLanguage() {
         return 'es';
     } else if (userLang.startsWith('fr')) {
         return 'fr';
+    } else if (userLang.startsWith('de')) {
+        return 'de';
     } else {
         return 'en';
     }
@@ -235,7 +247,7 @@ function detectBrowserLanguage() {
 
 // Function to switch dictionaries
 function switchDictionary(lang) {
-    if (!['en', 'es', 'fr'].includes(lang)) {
+    if (!['en', 'es', 'fr', 'de'].includes(lang)) {
         console.error(`Invalid language code: ${lang}`);
         return;
     }

@@ -47,6 +47,18 @@ const LanguageManager = {
             inputInstructions: 'Entrez votre indice de mots croisés',
             noResults: 'Aucun mot trouvé',
             resultCount: '{count} mots trouvés'
+        },
+        de: {
+            appTitle: 'Kreuzworträtsel-Löser',
+            theme: 'Thema',
+            wordSize: 'Wortgröße',
+            clear: 'Löschen',
+            loadingTitle: 'Wörterbuch wird geladen',
+            loading: 'Laden',
+            initializing: 'Initialisiere...',
+            inputInstructions: 'Geben Sie Ihren Kreuzworträtselhinweis ein',
+            noResults: 'Keine passenden Wörter gefunden',
+            resultCount: '{count} Wörter gefunden'
         }
     },
     
@@ -54,7 +66,8 @@ const LanguageManager = {
     keyboardLayouts: {
         en: ['qwertyuiop', 'asdfghjkl', 'zxcvbnm'],
         es: ['qwertyuiop', 'asdfghjklñ', 'zxcvbnm'],
-        fr: ['azertyuiop', 'qsdfghjklm', 'wxcvbn']
+        fr: ['azertyuiop', 'qsdfghjklm', 'wxcvbn'],
+        de: ['qwertzuiop', 'asdfghjkl', 'yxcvbnm']
     },
     
     // Initialize language based on browser or saved preference
@@ -82,6 +95,8 @@ const LanguageManager = {
             return 'es';
         } else if (userLang.startsWith('fr')) {
             return 'fr';
+        } else if (userLang.startsWith('de')) {
+            return 'de';
         } else {
             return 'en';
         }
@@ -104,6 +119,11 @@ const LanguageManager = {
             switchDictionary('fr');
         });
         
+        document.getElementById('lang-de').addEventListener('click', () => {
+            this.changeLanguage('de');
+            switchDictionary('de');
+        });
+        
         // Set initial active state
         document.querySelectorAll('.lang-btn').forEach(btn => {
             btn.classList.remove('active');
@@ -119,7 +139,7 @@ const LanguageManager = {
     
     // Change language
     changeLanguage(lang) {
-        if (!['en', 'es', 'fr'].includes(lang)) {
+        if (!['en', 'es', 'fr', 'de'].includes(lang)) {
             console.error(`Invalid language code: ${lang}`);
             return;
         }
